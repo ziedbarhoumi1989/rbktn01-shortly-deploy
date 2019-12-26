@@ -35,26 +35,7 @@ Fork the shortly-deploy repo
 Use Liberator on your already existing fork of shortly-deploy. It will result in you having a new fork that is fit for deployment to the outside world
 Clone down your liberated repo npm install, node server.js and make sure you can access the shortly code on localhost:4568
 
-# Create a DigitalOcean account
-Create an account with some appropriate billing information
-Set up a billing alert so that you receive an email should your monthy usage exceed some amount you decide. Feel free to make this amount as small as you feel necessary
 
-# Build a MEAN stack DigitalOcean droplet
-Most deployment services, DigitalOcean included, allow you to pay them for giving you access to a Linux server that has an IP address exposed to the world wide web. Generally, you house and run your application code inside the Linux server you are paying to use so that others can access it. Often times, once you have access to one of these deployment servers, you have to install, in addition to your application code, programs and code that your application code needs, like, for example, NodeJS, git, or MongoDB.
-
-DigitalOcean calls the Linux servers they offer "droplets," and you can create many different kinds of droplets that already contain programs and code that might be useful for your application.
-
-Create a new DigitalOcean droplet, using the MEAN on 14.04 image in the "One-click Apps" section of the images. Choose the $10 droplet, in any datacenter, and give it any hostname you like. Do not select any additional options. Do be sure to create an SSH key for it.
-It will take about a minute to create the droplet, at which point in time you will be given the external facing IP address of the droplet.
-
-# Pull your liberated shortly-deploy repo into your droplet
-SSH or Secure Shell, is a protocol that allows you to securely log into remote servers from the terminal. Typically, when using SSH, you will need to be explicit about which user you are logging in as. In order to use SSH, from inside the terminal on your local machine, you issue the following command:
-
-  1│ssh <user-name>@<ip-address-of-the-server-you-want-to-log-into>
-SSH into the droplet you created as user root, answering yes to the question you are probably asked. You will not be able to do this if you did not successfully create an SSH key in the step above
-Once inside your droplet, clone down the liberated shortly-deploy repo somewhere inside it. Do npm install
-Now run node server.js and hit the correct port and IP address from inside your browser to see your liberated shortly-deploy app deployed to the world. Address any bugs
-  
 ## Set up a git remote for easy deployment
 There are many services out there to help make it easy on you, the developer, to continually deploy newer versions of your code. Remember how easy git push heroku master was? You are now going to roll your own version of this for your DigitalOcean deployment by way of a somewhat deep dive into git. The following task will require that you balance getting what you need to know out of the resource vs. going down a rabbit hole.
 

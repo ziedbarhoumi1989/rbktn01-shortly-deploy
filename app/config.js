@@ -1,40 +1,19 @@
-var path = require('path');
-var knex = require('knex')({
-  client: 'sqlite3',
-  connection: {
-    filename: path.join(__dirname, '../db/shortly.sqlite')
-  },
-  useNullAsDefault: true
-});
-var db = require('bookshelf')(knex);
+const mongoose = require('mongoose');
 
-db.knex.schema.hasTable('urls').then(function(exists) {
-  if (!exists) {
-    db.knex.schema.createTable('urls', function (link) {
-      link.increments('id').primary();
-      link.string('url', 255);
-      link.string('baseUrl', 255);
-      link.string('code', 100);
-      link.string('title', 255);
-      link.integer('visits');
-      link.timestamps();
-    }).then(function (table) {
-      console.log('Created Table', table);
-    });
-  }
-});
+//Promise
+mongoose.Promise = global.Promise;
 
-db.knex.schema.hasTable('users').then(function(exists) {
-  if (!exists) {
-    db.knex.schema.createTable('users', function (user) {
-      user.increments('id').primary();
-      user.string('username', 100).unique();
-      user.string('password', 100);
-      user.timestamps();
-    }).then(function (table) {
-      console.log('Created Table', table);
-    });
-  }
-});
+var dbName = "shortly-depoly"
+mongoURI = `mongodb://localhost/${dbName}`
+mongoose.connect(mongoURI, { useMongoClient: true });
 
-module.exports = db;
+var db = mongoose.connection;
+
+// add event open the connection and handle the error
+mongoose.connection.once("open", () => {
+  console.log("the connection was made")
+}).on("error", (error) => {
+  console.log("faild to connect to database")
+})
+
+module.exports.db = db;
